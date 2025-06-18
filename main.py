@@ -35,8 +35,18 @@ def main_page():
       <iframe id="fullIframe" src="/discord-court"></iframe>
 
       <script>
-        document.getElementById('openBtn').addEventListener('click', () => {
-          document.getElementById('fullIframe').style.display = 'block';
+        const btn = document.getElementById('openBtn');
+        const iframe = document.getElementById('fullIframe');
+
+        btn.addEventListener('click', () => {
+          iframe.style.display = 'block';
+          // Tell the iframe to play audio
+          iframe.contentWindow.postMessage('playAudio', '*');
+        });
+
+        // Optional: also send playAudio once iframe is loaded
+        iframe.addEventListener('load', () => {
+          iframe.contentWindow.postMessage('playAudio', '*');
         });
       </script>
     </body>
